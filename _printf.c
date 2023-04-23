@@ -1,90 +1,81 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <unistd.h>
 
+/**
+ * switcher- process a single conversion specifier in the printf format string
+ * @check_case: the conversion specifier character
+ * @vl: the argument list to extract the value to print from
+ * @counter: the current character count
+ * Return: the updated character count
+ */
 
-void print(char *str)
+int switcher(char check_case, va_list vl, int counter)
 {
-    while(*str)
-    {
-        putchar(*str);
-        str++;
-    }
+switch (check_case)
+{
+case 'c':
+_putchar(va_arg(vl, int));
+counter++;
+break;
+case 's':
+counter += print_str(va_arg(vl, char *));
+break;
+case 'i':
+case 'd':
+counter += print_int(va_arg(vl, int));
+break;
+case 'b':
+print_bin(va_arg(vl, int));
+break;
+case 'u':
+print_int(va_arg(vl, int));
+break;
+case 'o':
+print_int(va_arg(vl, int));
+break;
+case 'x':
+print_hex(va_arg(vl, int));
+break;
+case 'X':
+print_HEX(va_arg(vl, int));
+break;
+case '%':
+_putchar('%');
+break;
+default:
+_putchar(check_case);
+break;
+}
+return (counter);
 }
 
-void digit(int d)
-{
-    char buf[16];
-    int i = 0, j = 0;
-
-    // If the digit is negative
-    if (d < 0)
-    {
-        putchar('-');
-        d = -d;
-    }
-
-    // Convert the integer to a string of decimal digits
-    while (d != 0) {
-        buf[i++] = (d % 10) + '0';
-        d /= 10;
-    }
-
-    j = i - 1;
-    // Print the digits in the correct order
-    while (j >= 0) {
-        putchar(buf[j]);
-        j--;
-    }
-}
-
-
-//hello %d there %d
-//      ^
-//      67       ii++
-
+/**
+ * _printf - print a formatted string to standart output
+ * @format: the printf format string to use
+ * Return: total number of characters printed
+ */
 
 int _printf(const char *format, ...)
 {
-    int i = 0, counter = 0;
-    va_list args;
-    va_start(args, format);
 
-    while (format[i])
-    {
-        if (format[i] == '%')
-        {
-            i++;
-            switch (format[i])
-            {
-                case 'c':
-                    putchar(va_arg(args, int));
-                    break;
-                case 's':
-                    print(va_arg(args, char*));
-                    break;
-                case 'd':
-                    digit(va_arg(args, int));
-                    break;
-                case 'i':
-                    digit(va_arg(args, int));
-                    break;
-                default:
-                    putchar(format[i]);
-                    break;
-            }
-            counter++;
-        }
-        else
-            putchar(format[i]);
-            i++;
+int i = 0, specs = 0;
+int counter = 0;
+va_list vl;
+va_start(vl, format);
 
-    }
+while (format[i])
+{
+if (format[i] == '%')
+{
+i++;
+counter = switcher(format[i], vl, counter);
+}
+else
+_putchar(format[i]);
+counter++;
+i++;
+}
 
-    va_end(args);
-
-    return i - counter;
+va_end(vl);
+return (counter);
 }
 
