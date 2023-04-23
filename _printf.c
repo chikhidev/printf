@@ -57,7 +57,7 @@ return (counter);
 int _printf(const char *format, ...)
 {
 
-int i = 0, specs = 0;
+int i = 0;
 int counter = 0;
 va_list vl;
 va_start(vl, format);
@@ -78,4 +78,3 @@ i++;
 va_end(vl);
 return (counter);
 }
-
