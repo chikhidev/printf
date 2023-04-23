@@ -1,6 +1,4 @@
 #include "main.h"
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 1024
 
 /**
  * print_str - write a single char
@@ -10,24 +8,12 @@
 
 unsigned int print_str(char *s)
 {
-char *buffer = malloc(BUFFER_SIZE);
-unsigned int i = 0;
-int j = 0;
-
+unsigned int i = 1;
 while (s[i] != '\0')
 {
-if (j == BUFFER_SIZE && i != 0)
-{
-write(1, buffer, BUFFER_SIZE);
-j = 0;
+	_putchar(s[i]);
+	i++;
 }
-buffer[j] = s[i];
-i++;
-j++;
-}
-buffer[j] = '\0';
-write(1, buffer, j);
-free(buffer);
 return (i);
 }
 
@@ -40,8 +26,6 @@ return (i);
 unsigned int print_int(int n)
 {
 unsigned int i = 1;
-char *buffer = malloc(BUFFER_SIZE);
-
 if (n < 0)
 {
 i++;
@@ -103,14 +87,3 @@ print_hex(n / 16);
 }
 (n % 16 < 10) ? _putchar(n % 16 + 48) : _putchar((n % 16 - 10) + 97);
 }
-
-void print_HEX(int n)
-{
-n < 0 ? n = -n : n;
-if (n / 16 != 0)
-{
-print_HEX(n / 16);
-}
-(n % 16 < 10) ? _putchar(n % 16 + 48) : _putchar((n % 16 - 10) + 65);
-}
-#endif
