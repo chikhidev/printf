@@ -100,17 +100,27 @@ return (i);
 
 int print_bin(int n)
 {
-int i = 0;
+	int temp = n;
+	int count = 0;
+	int i;
+	int count2 = 0;
 
-n < 0 ? n = -n : n;
-if (n / 2 != 0)
-{
-print_bin(n / 2);
-i++;
-}
+	while (temp > 0)
+	{
+		temp /= 2;
+		count++;
+		count2++;
+	}
+	for (count -= 1; count >= 0; count--)
+	{
+		i = n >> count;
 
-_putchar(n % 2 + 48);
-return (i);
+		if (i & 1)
+			_putchar('1');
+		else
+			_putchar('0');
+	}
+	return (count2);
 }
 
 
