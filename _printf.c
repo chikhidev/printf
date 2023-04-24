@@ -18,12 +18,6 @@ case 'c':
 _putchar(va_arg(vl, int));
 counter++;
 break;
-<<<<<<< HEAD
-case 'S':
-counter += print_str(va_arg(vl, char *), 1);
-break;
-=======
->>>>>>> 0432a9be6adb81c0f0e780ceff649cea93612b6a
 case 's':
 counter += print_str(va_arg(vl, char *), 0);
 break;

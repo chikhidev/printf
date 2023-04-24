@@ -2,8 +2,9 @@
 
 /**
 * print_str - write a single char
-* @s: str to write
+* @str: str to write
 * @s_flag: flag
+* Description: print string
 * Return: number of bytes written
 */
 
@@ -100,49 +101,32 @@ return (i);
 
 int print_bin(int n)
 {
-<<<<<<< HEAD
-int i = 0;
-	
-n < 0 ? n = -n : n;
-if (n / 2 != 0)
+int temp = n;
+int count = 0;
+int i;
+int count2 = 0;
+
+while (temp > 0)
 {
-print_bin(n / 2);
-i++;
+temp /= 2;
+count++;
+count2++;
 }
+for (count -= 1; count >= 0; count--)
+{
+i = n >> count;
 
-_putchar(n % 2 + 48);
-return (i);
-=======
-	int temp = n;
-	int count = 0;
-	int i;
-	int count2 = 0;
-
-	while (temp > 0)
-	{
-		temp /= 2;
-		count++;
-		count2++;
-	}
-	for (count -= 1; count >= 0; count--)
-	{
-		i = n >> count;
-
-		if (i & 1)
-			_putchar('1');
-		else
-			_putchar('0');
-	}
-	return (count2);
->>>>>>> 0432a9be6adb81c0f0e780ceff649cea93612b6a
+if (i & 1)
+_putchar('1');
+else
+_putchar('0');
+}
+return (count2);
 }
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 0432a9be6adb81c0f0e780ceff649cea93612b6a
 /**
 * print_oct - print a number
 * @n: number to write
