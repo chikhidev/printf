@@ -61,6 +61,8 @@ if (format[i] == '%')
 i++;
 counter = switcher(vl, counter, &i, format);
 }
+if (counter == -1)
+return (-1);
 else
 {
 _putchar(format[i]);
