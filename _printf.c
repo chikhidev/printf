@@ -50,7 +50,7 @@ if (!format || (format[0] == '%' && !format[1]))
 {
 return (-1);
 }
-if (format[0] == '%' && format[1] == ' ' && !format[2])
+if (format[0] == '%' && format[1] == ' ')
 {
 return (-1);
 }
@@ -63,8 +63,7 @@ counter = switcher(vl, counter, &i, format);
 }
 else
 {
-_putchar(format[i]);
-counter++;
+counter += _putchar(format[i]);
 }
 i++;
 }
