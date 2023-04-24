@@ -19,6 +19,7 @@ _putchar(va_arg(vl, int));
 counter++;
 break;
 case 's':
+case 'S':
 counter += print_str(va_arg(vl, char *), 0);
 break;
 case '%':
