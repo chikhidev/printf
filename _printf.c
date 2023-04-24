@@ -43,24 +43,23 @@ return (counter);
 
 int _printf(const char *format, ...)
 {
-
 int i = 0, counter = 0;
+
 va_list vl;
 va_start(vl, format);
 if (!format || (format[0] == '%' && !format[1]))
-{
 return (-1);
-}
+
 if (format[0] == '%' && format[1] == ' ' && !format[2])
-{
 return (-1);
-}
 while (format[i] && format)
 {
 if (format[i] == '%')
 {
 i++;
 counter = switcher(vl, counter, &i, format);
+if (counter == -1)
+return (-1);
 }
 else
 {
