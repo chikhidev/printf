@@ -2,7 +2,7 @@
 
 /**
 * print_str - write a single char
-* @str: str to write
+* @s: str to write
 * @s_flag: flag
 * Return: number of bytes written
 */
@@ -39,6 +39,25 @@ i++;
 }
 return (counter);
 }
+
+/**
+* hex_print - prints the hexadecimal representation of a number
+* @n: the number to print
+* @base: the base of the number system to use for conversion
+*
+* Return: the number of digits printed
+*/
+int hex_print(unsigned int n, char *base)
+{
+int digits_printed = 0;
+
+if (n / _strlen(base))
+digits_printed += hex_print(n / _strlen(base), base);
+_putchar(base[n % _strlen(base)]);
+digits_printed++;
+return (digits_printed);
+}
+
 
 
 /**
@@ -103,20 +122,4 @@ print_oct(n / 8);
 _putchar(n % 8 + 48);
 }
 
-/**
-* hex_print - prints the hexadecimal representation of a number
-* @n: the number to print
-* @base: the base of the number system to use for conversion
-*
-* Return: the number of digits printed
-*/
-int hex_print(unsigned int n, char *base)
-{
-int digits_printed = 0;
 
-if (n / _strlen(base))
-digits_printed += hex_print(n / _strlen(base), base);
-_putchar(base[n % _strlen(base)]);
-digits_printed++;
-return (digits_printed);
-}
