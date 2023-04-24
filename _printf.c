@@ -1,52 +1,37 @@
 #include "main.h"
 
 /**
- * helper - process a single conversion specifier in the printf format string
- * @c: the conversion specifier character
- * @args: the argument list to extract the value to print from
- * @count: the current character count
+ * switcher- process a single conversion specifier in the printf format string
+ * @vl: the argument list to extract the value to print from
+ * @counter: the current character count
+ * @i: the index
+ * @s: string
  * Return: the updated character count
  */
-int helper(char c, va_list args, int count)
-{
 
-	switch (c)
-	{
-	case 'c':
-		count += _putchar((char)va_arg(args, int));
-		break;
-	case 's':
-	case 'S':
-		count += _puts(va_arg(args, char*));
-		break;
-	case '%':
-		count += _putchar('%');
-		break;
-	case 'd':
-	case 'i':
-		count += print_int(va_arg(args, int));
-		break;
-	case 'u':
-		count += print_unsd(va_arg(args, unsigned int));
-		break;
-	case 'b':
-	case 'o':
-	case 'x':
-	case 'X':
-		count += dec_to_base(va_arg(args, unsigned int), c);
-		break;
-	case 'p':
-		count += print_pointer(va_arg(args, void *));
-		break;
-	case 'r':
-		count += _rev_str(va_arg(args, void *));
-		break;
-	default:
-		count += _putchar('%');
-		count += _putchar(c);
-		break;
-	}
-	return (count);
+
+int switcher(va_list vl, int counter, int *i, const char *s)
+{
+switch (s[*i])
+{
+case 'c':
+_putchar(va_arg(vl, int));
+counter++;
+break;
+case 's':
+counter += print_str(va_arg(vl, char *), 0);
+break;
+case '%':
+_putchar('%');
+counter++;
+break;
+default:
+_putchar(s[*i - 1]);
+_putchar(s[*i]);
+counter += 2;
+break;
+}
+return (counter);
 }
 
 /**
@@ -57,33 +42,33 @@ int helper(char c, va_list args, int count)
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int count = 0;
 
-	va_start(args, format);
+int i = 0, counter = 0;
+va_list vl;
+va_start(vl, format);
+if (!format || (format[0] == '%' && !format[1]))
+{
+return (-1);
+}
+if (format[0] == '%' && format[1] == ' ' && !format[2])
+{
+return (-1);
+}
+while (format[i] && format)
+{
+if (format[i] == '%')
+{
+i++;
+counter = switcher(vl, counter, &i, format);
+}
+else
+{
+_putchar(format[i]);
+counter++;
+}
+i++;
+}
 
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-
-	while (*format && format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			count = helper(*format, args, count);
-			if (count == -1)
-				return (-1);
-		}
-		else
-		{
-			count += _putchar(*format);
-		}
-
-		format++;
-	}
-	va_end(args);
-	return (count);
+va_end(vl);
+return (counter);
 }

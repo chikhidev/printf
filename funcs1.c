@@ -1,99 +1,99 @@
 #include "main.h"
 
 /**
- * _putchar - write a single char
- * @c: char to write
+ * print_str - write a single char
+ * @s: str to write
+ * @limit: int limiter to limit string
  * Return: number of bytes written
  */
-int _putchar (char c)
+
+unsigned int print_str(char *s, unsigned int limit)
 {
-	return (buffer(c));
+unsigned int i = 0;
+if (!s)
+{
+write(1, "(null)", 6);
+return (6);
 }
 
-/**
- * is_printable - check if char is printable
- * @c: char
- * Return: -1 or c
- */
-
-int is_printable(char c)
+while (s[i])
 {
-	if (c >= 32 && c < 127)
-		return (-1);
-	return (c);
+if ((i == limit) && i)
+break;
+_putchar(s[i]);
+i++;
 }
-
-
-/**
- * _puts - write string
- * @s: string to write
- * Return: number of char written
- */
-
-int _puts(char *s)
-{
-	int i = 0;
-
-	if (!s)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
-	while (s[i])
-	{
-		_putchar(s[i]);
-		i++;
-	}
-	return (i);
+return (i);
 }
-
 
 /**
  * print_int - print a number
  * @n: number to write
  * Return: number of bytes written
  */
-int print_int(int n)
+
+unsigned int print_int(int n)
 {
-	int i = 0;
+unsigned int i = 1;
 
-	if (n < 0)
-	{
-		i += _putchar('-');
-		if (n == -2147483648)
-		{
-			i += _putchar('2');
-			n %= 1000000000;
-		}
+if (n < 0)
+{
+i++;
+_putchar('-');
+n = -n;
+}
 
-		i += print_int(-n);
-	}
-	else if (n >= 0 && n <= 9)
-		i += _putchar(n + '0');
-	else
-	{
-		i += print_int(n / 10);
-		i += print_int(n % 10);
-	}
-	return (i);
-
+if (n / 10 != 0)
+{
+i++;
+print_int(n / 10);
+}
+_putchar(n % 10 + 48);
+return (i);
 }
 
 /**
- * print_unsd - print unsigned number
- * @n: number
+ * print_bin - print a number
+ * @n: number to write
  * Return: number of bytes written
  */
-int print_unsd(unsigned int n)
-{
-	int i = 0;
 
-	if (n <= 9)
-		i += _putchar(n + '0');
-	else
-	{
-		i += print_unsd(n / 10);
-		i += print_unsd(n % 10);
-	}
-	return (i);
+void print_bin(int n)
+{
+n < 0 ? n = -n : n;
+if (n / 2 != 0)
+print_bin(n / 2);
+
+_putchar(n % 2 + 48);
+}
+
+/**
+ * print_oct - print a number
+ * @n: number to write
+ * Return: number of bytes written
+ */
+
+void print_oct(int n)
+{
+n < 0 ? n = -n : n;
+if (n / 8 != 0)
+print_oct(n / 8);
+
+_putchar(n % 8 + 48);
+}
+
+/**
+ * print_hex - print a number
+ * @n: number to write
+ * Return: number of bytes written
+ */
+
+void print_hex(int n)
+{
+n < 0 ? n = -n : n;
+if (n / 16 != 0)
+{
+print_hex(n / 16);
+}
+(n % 16 < 10) ? _putchar(n % 16 + 48) : _putchar((n % 16 - 10) + 97);
 }
