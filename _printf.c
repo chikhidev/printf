@@ -15,7 +15,7 @@ int switcher(va_list vl, int counter, int *i, const char *s)
 switch (s[*i])
 {
 case 'c':
-_putchar(va_arg(vl, int));
+_putchar((char)va_arg(vl, int));
 counter++;
 break;
 case 's':
