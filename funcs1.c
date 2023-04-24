@@ -100,12 +100,21 @@ return (i);
 
 int print_bin(int n)
 {
+int i = 0;
+
 n < 0 ? n = -n : n;
 if (n / 2 != 0)
+{
 print_bin(n / 2);
+i++;
+}
 
 _putchar(n % 2 + 48);
+return (i);
 }
+
+
+
 
 /**
 * print_oct - print a number
