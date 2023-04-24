@@ -10,5 +10,7 @@
 
 int _putchar(char c)
 {
+	if (c == NULL)
+		return write(1, NULL, 1);
 return (write(1, &c, 1));
 }
