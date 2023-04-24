@@ -8,14 +8,14 @@
 
 unsigned int print_str(char *s)
 {
-unsigned int i = 1;
+unsigned int i = 0;
 if (s == NULL) {
-_putchar('(');
-_putchar('n');
-_putchar('u');
-_putchar('l');
-_putchar('l');
-_putchar(')');
+write(1, "(null)", 6);
+return (6);
+}
+if (!s)
+{
+write(1, "(null)", 6);
 return (6);
 }
 while (s[i]) {
