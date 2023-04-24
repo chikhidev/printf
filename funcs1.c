@@ -7,9 +7,9 @@
  * Return: number of bytes written
  */
 
-unsigned int print_str(char *s, unsigned int limit)
+int print_str(char *s, int limit)
 {
-unsigned int i = 0;
+int i = 0;
 if (!s)
 {
 write(1, "(null)", 6);
@@ -32,9 +32,9 @@ return (i);
  * Return: number of bytes written
  */
 
-unsigned int print_int(int n)
+int print_int(int n)
 {
-unsigned int i = 1;
+int i = 1;
 
 if (n < 0)
 {
