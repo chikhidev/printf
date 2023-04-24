@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * print_HEX - write a single char
- * @n: str to write
- * Return: number of bytes written
- */
+* print_HEX - write a single char
+* @n: str to write
+* Return: number of bytes written
+*/
 
 void print_HEX(int n)
 {
@@ -17,14 +17,29 @@ print_HEX(n / 16);
 }
 
 /**
- * string_to_int - switch char to int
- * @c: char
- * Return: int
- */
+* string_to_int - switch char to int
+* @c: char
+* Return: int
+*/
 
 int string_to_int(char c)
 {
 if (c < '0' || c > '9')
 return (-1);
 return ((int)(c - '0'));
+}
+
+/**
+* _strlen - switch char to int
+* @s: strung
+* Return: int
+*/
+
+int _strlen(char *s)
+{
+int i = 0;
+
+while (*s++)
+i++;
+return (i);
 }
