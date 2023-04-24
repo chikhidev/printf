@@ -5,16 +5,16 @@
 
 /**
  * switcher- process a single conversion specifier in the printf format string
- * @check_case: the conversion specifier character
  * @vl: the argument list to extract the value to print from
  * @counter: the current character count
+ * @i: the index
+ * @s: string
  * Return: the updated character count
  */
 
 
-int switcher( va_list vl, int counter, int *i, const char *s)
+int switcher(va_list vl, int counter, int *i, const char *s)
 {
-
 switch (s[*i])
 {
 case 'c':
@@ -31,7 +31,7 @@ break;
 default:
 _putchar(s[*i - 1]);
 _putchar(s[*i]);
-counter+=2;
+counter += 2;
 break;
 }
 return (counter);
@@ -55,12 +55,12 @@ while (format[i])
 if (format[i] == '%')
 {
 i++;
-counter = switcher( vl, counter, &i, format);
+counter = switcher(vl, counter, &i, format);
 }
 else
 {
 _putchar(format[i]);
-counter++; 
+counter++;
 }
 i++;
 }

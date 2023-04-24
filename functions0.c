@@ -3,10 +3,11 @@
 /**
  * print_str - write a single char
  * @s: str to write
+ * @limit: int limiter to limit string
  * Return: number of bytes written
  */
 
-unsigned int print_str(char *s, int limit)
+unsigned int print_str(char *s, unsigned int limit)
 {
 unsigned int i = 0;
 if (!s)
@@ -17,9 +18,9 @@ return (6);
 
 while (s[i])
 {
-    if (i == limit && i)
-        break;
-    _putchar(s[i]);
+if ((i == limit) && i)
+break;
+_putchar(s[i]);
 i++;
 }
 return (i);

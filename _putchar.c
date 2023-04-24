@@ -7,10 +7,13 @@
 *
 * Return: a write system call. it should go well. return -1 if somethine wrong
 */
-
 int _putchar(char c)
 {
-	if (c == NULL)
-		return write(1, NULL, 1);
-return (write(1, &c, 1));
+    if (c == '\0') {
+        c = ' ';
+    }
+    if (write(1, &c, 1) == -1) {
+        return (-1);
+    }
+    return (1);
 }
