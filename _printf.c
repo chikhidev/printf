@@ -22,6 +22,10 @@ case 's':
 case 'S':
 counter += print_str(va_arg(vl, char *), 0);
 break;
+case 'd':
+case 'i':
+counter += print_int(va_arg(vl, int));
+break;
 case '%':
 _putchar('%');
 counter++;

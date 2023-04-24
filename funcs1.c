@@ -34,23 +34,29 @@ return (i);
 
 int print_int(int n)
 {
-int i = 1;
+int i = 0;
 
 if (n < 0)
 {
-i++;
-_putchar('-');
-n = -n;
+i += _putchar('-');
+if (n == -2147483648)
+{
+i += _putchar('2');
+n %= 1000000000;
 }
 
-if (n / 10 != 0)
-{
-i++;
-print_int(n / 10);
+i += print_int(-n);
 }
-_putchar(n % 10 + 48);
+else if (n >= 0 && n <= 9)
+i += _putchar(n + '0');
+else
+{
+i += print_int(n / 10);
+i += print_int(n % 10);
+}
 return (i);
 }
+
 
 /**
  * print_bin - print a number

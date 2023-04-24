@@ -9,12 +9,17 @@
  */
 int main(void)
 {
-int len, len1;
+int len;
+int len2;
 
-len = printf("%c\n", '\0');
-len1 = _printf("%c\n", '\0');
+len = _printf("Let's try to printf a simple sentence.\n");
+len2 = printf("Let's try to printf a simple sentence.\n");
 
-printf("len: %d\n", len);
-printf("len1: %d\n", len1);
+_printf("Length:[%d, %i]\n", len, len);
+printf("Length:[%d, %i]\n", len2, len2);
+_printf("Negative:[%d]\n", -762534);
+printf("Negative:[%d]\n", -762534);
+
+
 return (0);
 }
