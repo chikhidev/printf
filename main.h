@@ -11,7 +11,7 @@ int _puts(char *s);
 int string_to_int(char c);
 int limiter(const char *s, int *i);
 unsigned int print_int(int n);
-unsigned int print_str(char *s, unsigned int limit);
+unsigned int print_str(char *s);
 void print_bin(int n);
 void print_oct(int n);
 void print_hex(int n);

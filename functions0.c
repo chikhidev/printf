@@ -7,23 +7,21 @@
  * Return: number of bytes written
  */
 
-unsigned int print_str(char *s, unsigned int limit)
+unsigned int print_str(char *s)
 {
 unsigned int i = 0;
-if (!s)
-{
-write(1, "(null)", 6);
-return (6);
-}
 
+if (s)
+{
 while (s[i])
 {
-if ((i == limit) && i)
-break;
 _putchar(s[i]);
 i++;
 }
 return (i);
+}
+
+return (write(1, "(null)", 6));
 }
 
 /**
