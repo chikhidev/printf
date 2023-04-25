@@ -35,6 +35,9 @@ break;
 case 'b':
 counter += print_bin(va_arg(vl, int));
 break;
+case 'p':
+counter += print_pointer(va_arg(vl, void *));
+break;
 default:
 _putchar(s[*i - 1]);
 _putchar(s[*i]);

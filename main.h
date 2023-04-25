@@ -15,6 +15,7 @@ int print_str(char *s, int s_flag);
 int print_bin(int n);
 void print_oct(int n);
 int hex_print(unsigned int n, char *base);
+int print_pointer(void *ptr);
 void print_HEX(int n);
 int _printf(const char *format, ...);
 int helper(char c, va_list args, int count);

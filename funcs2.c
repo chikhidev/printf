@@ -43,3 +43,28 @@ while (*s++)
 i++;
 return (i);
 }
+
+
+/**
+ * print_pointer - print pointer
+ * @ptr: pointer
+ * Return: counting (i)
+ */
+
+int print_pointer(void *ptr)
+{
+int i = 0;
+long int n;
+
+if (!ptr)
+{
+	return (print_str("(nil)", 0));
+}
+
+n = (unsigned long int)ptr;
+
+i += print_str("0x", 0);
+i += hex_print(n, "0123456789abcdef");
+
+return (i);
+}
