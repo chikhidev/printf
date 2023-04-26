@@ -32,8 +32,8 @@ case 'd':
 case 'i':
 counter += print_int(va_arg(vl, int));
 break;
-case 'b':
-counter += print_bin(va_arg(vl, unsigned int), s[*i]);
+case ('b' || 'o' || 'x' || 'X'):
+counter += print_bin(va_arg(vl, int), s[*i]);
 break;
 case 'p':
 counter += print_pointer(va_arg(vl, void *));
