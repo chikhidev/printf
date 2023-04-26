@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
 * switcher- process a single conversion specifier in the printf format string
 * @vl: the argument list to extract the value to print from
@@ -7,6 +8,8 @@
 * @s: string
 * Return: the updated character count
 */
+
+
 int switcher(va_list vl, int counter, int *i, const char *s)
 {
 switch (s[*i])
@@ -29,14 +32,14 @@ case 'd':
 case 'i':
 counter += print_int(va_arg(vl, int));
 break;
+case 'b':
+counter += print_bin(va_arg(vl, int));
+break;
 case 'p':
 counter += print_pointer(va_arg(vl, void *));
 break;
-case 'r':
-counter += print_r(va_arg(vl, char *));
-break;
-case 'R':
-counter += print_R(va_arg(vl, char *));
+case 'p':
+counter += print_pointer(va_arg(vl, void *));
 break;
 case '\0':
 counter += _putchar(s[*i - 1]);
@@ -50,6 +53,7 @@ break;
 }
 return (counter);
 }
+
 /**
 * _printf - print a formatted string to standart output
 * @format: the printf format string to use
