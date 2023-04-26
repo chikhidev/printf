@@ -15,9 +15,9 @@ int switch_base(int base, char *small, char *big, char *num, int j)
 
 switch (base)
 {
-case 'U':
+case 'X':
 return (_putchar(small[(int)num[j]]));
-case 'l':
+case 'x':
 return (_putchar(big[(int)num[j]]));
 default:
 return (_putchar(num[j] + '0'));
@@ -34,7 +34,7 @@ return (_putchar(num[j] + '0'));
 
 int print_bin(unsigned long int n, char base)
 {
-int op = 0, x, spec;
+int op1 = 0, op2, x, spec;
 char num[64], *small = "0123456789abcdef", *big = "0123456789ABCDEF";
 
 if (n == 0)
@@ -55,19 +55,19 @@ while (n)
 {
 x = n % spec;
 n = n / spec;
-num[op] = x;
-op++;
+num[op1] = x;
+op1++;
 }
 
-op--;
+op2 = op1 - 1;
 
-while (op >= 0)
+while (op2 >= 0)
 {
-n = switch_base(base, small, big, num, op);
-op--;
+n = switch_base(base, small, big, num, op2);
+op2--;
 }
 
-return (op);
+return (op1);
 }
 
 /**
