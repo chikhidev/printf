@@ -1,19 +1,73 @@
 #include "main.h"
 
 /**
-* print_HEX - write a single char
+* switch_base - only for switching cases
+* @base: int
+* @small: char
+* @big: int
+* @num: char
+* @j: int
+* Return: counting
+*/
+
+int switch_base(int base, char *small, char *big, char *num, int j)
+{
+
+switch (base)
+{
+case 'U':
+return (_putchar(small[(int)num[j]]));
+case 'l':
+return (_putchar(big[(int)num[j]]));
+default:
+return (_putchar(num[j] + '0'));
+}
+
+}
+
+/**
+* print_bin - write a single char
 * @n: str to write
+* @base: char
 * Return: number of bytes written
 */
 
-void print_HEX(int n)
+int print_bin(unsigned long int n, char base)
 {
-n < 0 ? n = -n : n;
-if (n / 16 != 0)
+int op = 0, x, spec;
+char num[64], *small = "0123456789abcdef", *big = "0123456789ABCDEF";
+
+if (n == 0)
 {
-print_HEX(n / 16);
+return (_putchar('0'));
 }
-(n % 16 < 10) ? _putchar(n % 16 + 48) : _putchar((n % 16 - 10) + 65);
+
+/* check specifier */
+
+if ((base == 'b'))
+	spec = 2;
+else if ((base == 'o'))
+	spec = 8;
+else
+	spec = 16;
+
+while (n)
+{
+x = n % spec;
+n = n / spec;
+num[op] = x;
+op++;
+}
+
+op--;
+
+while (op >= 0)
+{
+n = switch_base(base, small, big, num, op);
+op--;
+}
+
+return (op);
 }
 
 /**
@@ -46,10 +100,10 @@ return (i);
 
 
 /**
- * print_pointer - print pointer
- * @ptr: pointer
- * Return: counting (i)
- */
+* print_pointer - print pointer
+* @ptr: pointer
+* Return: counting (i)
+*/
 
 int print_pointer(void *ptr)
 {
@@ -58,13 +112,15 @@ long int n;
 
 if (!ptr)
 {
-	return (print_str("(nil)", 0));
+return (print_str("(nil)", 0));
 }
 
 n = (unsigned long int)ptr;
 
-i += print_str("0x", 0);
-i += hex_print(n, "0123456789abcdef");
+i += print_str("0x", 1);
+i += print_bin(n, 'U');
 
 return (i);
 }
+
+
