@@ -111,4 +111,28 @@ print_oct(n / 8);
 _putchar(n % 8 + 48);
 }
 
+/**
+ * print_r - print reversed string
+ * @s: string
+ * Return: number of bytes written
+ */
 
+int print_r(char *s)
+{
+int i = 0;
+int len;
+
+if (!s)
+s = "(null)";
+
+len = _strlen(s) - 1;
+
+while (len >= 0)
+{
+_putchar(s[len]);
+len--;
+i++;
+}
+
+return (i++);
+}
