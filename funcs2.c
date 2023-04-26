@@ -1,87 +1,21 @@
 #include "main.h"
 
 /**
-* switch_base - only for switching cases
-* @base: int
-* @small: char
-* @big: int
-* @num: char
-* @j: int
-* Return: counting
-*/
-
-int switch_base(int base, char *small, char *big, char *num, int j)
-{
-
-switch (base)
-{
-case 'X':
-return (_putchar(small[(int)num[j]]));
-case 'x':
-return (_putchar(big[(int)num[j]]));
-default:
-return (_putchar(num[j] + '0'));
-}
-
-}
-
-/**
-* print_bin - write a single char
+* print_HEX - write a single char
 * @n: str to write
-* @base: char
 * Return: number of bytes written
 */
 
-int print_bin(unsigned long int n, char base)
+void print_HEX(int n)
 {
-int op1 = 0, op2, x, spec;
-char num[64], *small = "0123456789abcdef", *big = "0123456789ABCDEF";
-
-if (n == 0)
+n < 0 ? n = -n : n;
+if (n / 16 != 0)
 {
-return (_putchar('0'));
+print_HEX(n / 16);
+}
+(n % 16 < 10) ? _putchar(n % 16 + 48) : _putchar((n % 16 - 10) + 65);
 }
 
-/* check specifier */
-
-if ((base == 'b'))
-	spec = 2;
-else if ((base == 'o'))
-	spec = 8;
-else
-	spec = 16;
-
-while (n)
-{
-x = n % spec;
-n = n / spec;
-num[op1] = x;
-op1++;
-}
-
-op2 = op1 - 1;
-
-while (op2 >= 0)
-{
-n = switch_base(base, small, big, num, op2);
-op2--;
-}
-
-return (op1);
-}
-
-/**
-* string_to_int - switch char to int
-* @c: char
-* Return: int
-*/
-
-int string_to_int(char c)
-{
-if (c < '0' || c > '9')
-return (-1);
-return ((int)(c - '0'));
-}
 
 /**
 * _strlen - switch char to int
@@ -100,10 +34,10 @@ return (i);
 
 
 /**
-* print_pointer - print pointer
-* @ptr: pointer
-* Return: counting (i)
-*/
+ * print_pointer - print pointer
+ * @ptr: pointer
+ * Return: counting (i)
+ */
 
 int print_pointer(void *ptr)
 {
@@ -112,14 +46,75 @@ long int n;
 
 if (!ptr)
 {
-return (print_str("(nil)", 0));
+	return (print_str("(nil)", 0));
 }
 
 n = (unsigned long int)ptr;
 
-i += print_str("0x", 1);
-i += print_bin(n, 'U');
+i += print_str("0x", 0);
+i += hex_print(n, "0123456789abcdef");
 
 return (i);
 }
 
+
+/**
+* print_r - switch char to int
+* @s: strung
+* Return: int
+*/
+
+int print_r(char *s)
+{
+int i = 0;
+int len;
+
+if (!s)
+s = "(null)";
+
+len = _strlen(s) - 1;
+
+while (len >= 0)
+{
+_putchar(s[len]);
+len--;
+i++;
+}
+
+return (i++);
+}
+
+/**
+* print_R - print pointer
+* @s: pointer
+* Return: counting (i)
+*/
+
+
+int print_R(char *s)
+{
+int i = 0;
+
+if (!s)
+{
+return (print_str("(null)", 1));
+}
+
+while (*s)
+{
+char c = *s;
+if (c >= 'a' && c <= 'z')
+{
+c = ((c - 'a') + 13) % 26 + 'a';
+}
+else if (c >= 'A' && c <= 'Z')
+{
+c = ((c - 'A') + 13) % 26 + 'A';
+}
+
+i += _putchar(c);
+s++;
+}
+
+return (i);
+}

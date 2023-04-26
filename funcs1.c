@@ -4,6 +4,7 @@
 * print_str - write a single char
 * @str: str to write
 * @s_flag: flag
+* Description: print string
 * Return: number of bytes written
 */
 
@@ -23,15 +24,12 @@ if (s_flag)
 _putchar('\\');
 _putchar('x');
 if (str[i] < 16)
-{
 _putchar('0');
 counter += 3;
 }
 else
-counter += 2;
-}
-else
-counter += print_bin(str[i], 'U');
+counter++;
+counter += hex_print(str[i], "0123456789ABCDEF");
 }
 else
 {
@@ -93,16 +91,41 @@ i += print_int(n % 10);
 }
 return (i);
 }
+/**
+* print_bin - print a number
+* @n: number to write
+* Return: number of bytes written
+*/
+int print_bin(int n)
+{
+int temp = n;
+int count = 0;
+int i;
+int count2 = 0;
 
+while (temp > 0)
+{
+temp /= 2;
+count++;
+count2++;
+}
+for (count -= 1; count >= 0; count--)
+{
+i = n >> count;
 
-
+if (i & 1)
+_putchar('1');
+else
+_putchar('0');
+}
+return (count2);
+}
 /**
 * print_oct - print a number
 * @n: number to write
 * Return: number of bytes written
 */
-
-void print_oct(int n)
+int print_oct(int n)
 {
 n < 0 ? n = -n : n;
 if (n / 8 != 0)
@@ -111,28 +134,4 @@ print_oct(n / 8);
 _putchar(n % 8 + 48);
 }
 
-/**
- * print_r - print reversed string
- * @s: string
- * Return: number of bytes written
- */
 
-int print_r(char *s)
-{
-int i = 0;
-int len;
-
-if (!s)
-s = "(null)";
-
-len = _strlen(s) - 1;
-
-while (len >= 0)
-{
-_putchar(s[len]);
-len--;
-i++;
-}
-
-return (i++);
-}
