@@ -33,17 +33,13 @@ case 'i':
 counter += print_int(va_arg(vl, int));
 break;
 case 'b':
-counter += print_bin(va_arg(vl, int));
+counter += print_bin(va_arg(vl, unsigned int), s[*i]);
 break;
 case 'p':
 counter += print_pointer(va_arg(vl, void *));
 break;
-case 'p':
-counter += print_pointer(va_arg(vl, void *));
-break;
-case '\0':
-counter += _putchar(s[*i - 1]);
-counter += _putchar('\0');
+case 'r':
+print_r(va_arg(vl, void *));
 break;
 default:
 _putchar(s[*i - 1]);
